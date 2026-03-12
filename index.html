@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>RoadSense AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.21.0/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.5/dist/teachablemachine-image.min.js"></script>
+</head>
+
+<body>
+
+<div class="bg-blur"></div>
+
+<header class="topbar">
+  RoadSense <span>AI</span>
+  <div id="modelStatus" class="model-status">⏳ Loading AI Model...</div>
+</header>
+
+<main class="container">
+
+  <div id="map"></div>
+
+  <div class="controls">
+
+    <h3>Travel Time</h3>
+    <select id="travelTime">
+      <option value="day">Day</option>
+      <option value="night">Night</option>
+    </select>
+
+    <h3>Origin</h3>
+    <input type="text" id="originInput" placeholder="Enter origin">
+    <div id="originSuggestions" class="suggestions"></div>
+    <button onclick="setOrigin()">📍 Set Origin</button>
+    <button onclick="useMyLocation()">🌐 Use My Location</button>
+
+    <h3>Destination</h3>
+    <input type="text" id="destinationInput" placeholder="Enter destination">
+    <div id="destinationSuggestions" class="suggestions"></div>
+    <button onclick="setDestination()">📍 Set Destination</button>
+
+    <button onclick="drawRoute()">🗺 Draw Route</button>
+    <button onclick="resetApp()">🔄 Reset</button>
+
+    <p id="routeInfo"></p>
+
+    <div id="riskPanel">
+      <p>🔴 Potholes Detected: <span id="potholeCount">0</span></p>
+      <p>⚠️ Risk Score: <span id="riskScore">0%</span></p>
+      <p>🚨 Accident Probability: <span id="accidentScore">0%</span></p>
+    </div>
+
+    <h3>AI Road Monitoring</h3>
+    <video id="camera" autoplay playsinline></video>
+    <button onclick="startCamera()">📷 Start Camera</button>
+    <button onclick="detectRoadAbnormality()">🔍 Detect Once</button>
+    <button id="autoBtn" onclick="toggleAutoDetect()">▶ Start Auto Detect</button>
+    <button onclick="clearPotholes()">🧹 Clear Pothole Data</button>
+    <p id="aiResult"></p>
+
+  </div>
+
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

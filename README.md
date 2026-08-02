@@ -33,4 +33,3 @@ RoadSense AI is a web-based smart road monitoring system that detects potholes u
    - The pothole is stored locally.
 5. The system calculates a risk score based on potholes along the route.
 
-## Project Structure

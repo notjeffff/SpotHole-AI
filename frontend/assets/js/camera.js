@@ -32,6 +32,11 @@ function initUI() {
     ui.frames = document.getElementById('telemetry-frames');
     ui.overlayText = document.getElementById('camera-overlay-text');
     ui.scanLine = document.getElementById('scan-line');
+    
+    ui.modelStatus = document.getElementById('telemetry-model-status');
+    ui.modelVersion = document.getElementById('telemetry-model-version');
+    ui.inferenceTime = document.getElementById('telemetry-inference-time');
+    ui.mockDetectionBox = document.getElementById('mock-detection-box');
 }
 
 export async function startCamera() {
@@ -141,14 +146,38 @@ async function captureAndSendFrame() {
     ui.backendStatus.textContent = 'Sending...';
     ui.backendStatus.className = 'text-warning';
 
-    const success = await postDetection(payload);
+    const prediction = await postDetection(payload);
     
-    if (success) {
+    if (prediction) {
         ui.backendStatus.textContent = 'Ready';
         ui.backendStatus.className = 'text-success';
+        
+        ui.modelStatus.textContent = 'Active';
+        ui.modelStatus.className = 'text-success';
+        
+        ui.modelVersion.textContent = prediction.model_version || 'Unknown';
+        ui.inferenceTime.textContent = `${prediction.processing_time_ms} ms`;
+        
+        if (prediction.detected && prediction.bbox) {
+            ui.mockDetectionBox.style.display = 'block';
+            
+            // Map bbox to UI (basic relative mapping for mockup purposes)
+            // YOLO bbox is relative to the original image dimensions.
+            // For now, we'll just display the box centrally or update the text.
+            const boxLabel = ui.mockDetectionBox.querySelector('.detection-label');
+            if (boxLabel) {
+                const confPercent = Math.round(prediction.confidence * 100);
+                boxLabel.innerHTML = `${prediction.class} <span class="confidence">${confPercent}%</span>`;
+            }
+        } else {
+            ui.mockDetectionBox.style.display = 'none';
+        }
+        
     } else {
         ui.backendStatus.textContent = 'Offline';
         ui.backendStatus.className = 'text-danger';
+        ui.modelStatus.textContent = 'Offline';
+        ui.modelStatus.className = 'text-danger';
     }
 }
 
@@ -190,9 +219,14 @@ export function stopCamera() {
         ui.gpsStatus.className = 'text-muted';
         ui.backendStatus.textContent = 'Waiting';
         ui.backendStatus.className = 'text-muted';
+        ui.modelStatus.textContent = 'Ready';
+        ui.modelStatus.className = 'text-warning';
+        ui.modelVersion.textContent = 'Loading...';
+        ui.inferenceTime.textContent = '-- ms';
         ui.overlayText.style.display = 'block';
         ui.overlayText.innerHTML = '<span class="pulse-dot"></span> Waiting for Camera...';
         ui.scanLine.style.display = 'none';
+        ui.mockDetectionBox.style.display = 'none';
         
         ui.timer.textContent = '00:00:00';
         ui.coords.textContent = 'Waiting for GPS...';

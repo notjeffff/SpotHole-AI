@@ -23,11 +23,11 @@ export async function postDetection(payload) {
         
         if (!response.ok) {
             console.error('Failed to post detection:', await response.text());
-            return false;
+            return null;
         }
-        return true;
+        return await response.json();
     } catch (error) {
         console.error('Network error while posting detection:', error);
-        return false;
+        return null;
     }
 }

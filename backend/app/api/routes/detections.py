@@ -1,10 +1,11 @@
-from typing import List
+from typing import List, Any
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.dependencies import get_db
-from app.api.deps import get_detection_service
+from app.api.deps import get_detection_service, get_ai_service
 from app.services.detection import DetectionService
+from app.services.ai_service import AIService
 from app.schemas.detection import DetectionCreate, DetectionUpdate, DetectionResponse
 
 router = APIRouter()
@@ -35,16 +36,20 @@ def get_detection(
         raise HTTPException(status_code=404, detail="Detection not found")
     return detection
 
-@router.post("/", response_model=DetectionResponse, status_code=status.HTTP_201_CREATED, summary="Create a detection")
+@router.post("/", status_code=status.HTTP_201_CREATED, summary="Run inference on a detection frame")
 def create_detection(
     detection_in: DetectionCreate, 
-    db: Session = Depends(get_db),
-    service: DetectionService = Depends(get_detection_service)
+    ai: AIService = Depends(get_ai_service)
 ):
     """
-    Create a new detection record.
+    Phase 3E: Intercept frame, run YOLO inference, and return results.
+    Bypassing database writes completely for now.
     """
-    return service.create(db, obj_in=detection_in)
+    if not detection_in.image_path:
+        raise HTTPException(status_code=400, detail="Missing image_path payload")
+        
+    prediction = ai.predict(detection_in.image_path)
+    return prediction
 
 @router.patch("/{id}", response_model=DetectionResponse, summary="Update a detection")
 def update_detection(

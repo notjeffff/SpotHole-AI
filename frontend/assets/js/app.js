@@ -1,4 +1,5 @@
 import { initNavigation } from './navigation.js';
+import { initDetectionCamera } from './camera.js';
 
 /**
  * Main application orchestrator.
@@ -10,6 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Extension points for future phases:
   // initMap();
-  // initDetectionCamera();
+  initDetectionCamera();
   // initAnalytics();
 });

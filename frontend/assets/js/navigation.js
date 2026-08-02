@@ -1,4 +1,5 @@
 import { $, $$, addClass, removeClass } from './utils.js';
+import { stopCamera } from './camera.js';
 
 /**
  * Initializes the navigation logic for the application shell.
@@ -55,6 +56,11 @@ export function initNavigation() {
       // Update breadcrumb
       if (breadcrumb && viewTitle) {
         breadcrumb.textContent = viewTitle;
+      }
+      
+      // Cleanup camera if leaving the Start Drive view
+      if (targetViewId !== 'view-drive') {
+        stopCamera();
       }
       
       // Close mobile menu on navigate

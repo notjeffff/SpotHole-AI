@@ -39,6 +39,14 @@ def create_app() -> FastAPI:
 
     # Include routers
     app.include_router(health.router, prefix=settings.API_V1_STR, tags=["Health"])
+    
+    from app.api.routes.potholes import router as potholes_router
+    from app.api.routes.detections import router as detections_router
+    from app.api.routes.reports import router as reports_router
+    
+    app.include_router(potholes_router, prefix=f"{settings.API_V1_STR}/potholes", tags=["Potholes"])
+    app.include_router(detections_router, prefix=f"{settings.API_V1_STR}/detections", tags=["Detections"])
+    app.include_router(reports_router, prefix=f"{settings.API_V1_STR}/reports", tags=["Reports"])
 
     return app
 

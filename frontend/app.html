@@ -452,21 +452,23 @@
             <!-- Left Side: Camera & Info -->
             <div class="drive-main-column">
               <!-- Camera Preview -->
-              <div class="camera-container">
-                <div class="camera-overlay-text">
+              <div class="camera-container" id="camera-container">
+                <video id="camera-video" autoplay playsinline style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; opacity: 0; transition: opacity 0.3s; z-index: 1;"></video>
+                <canvas id="capture-canvas" style="display: none;"></canvas>
+                <div class="camera-overlay-text" id="camera-overlay-text" style="z-index: 2;">
                   <span class="pulse-dot"></span> Waiting for Camera...
                 </div>
                 <!-- Mock Detection Overlay -->
-                <div class="mock-detection-box">
+                <div class="mock-detection-box" id="mock-detection-box" style="z-index: 3; display: none;">
                   <div class="detection-label">Pothole <span class="confidence">92%</span></div>
                 </div>
                 <!-- Scanning animation line -->
-                <div class="scan-line"></div>
+                <div class="scan-line" id="scan-line" style="z-index: 3; display: none;"></div>
               </div>
               
               <div class="drive-controls" style="margin-top: var(--space-md); display: flex; gap: var(--space-md);">
-                <button class="btn btn-primary" style="flex: 1; padding: var(--space-md); font-size: 1.1rem; justify-content: center;">Start Detection</button>
-                <button class="btn btn-secondary" style="flex: 1; padding: var(--space-md); font-size: 1.1rem; justify-content: center;">Stop Detection</button>
+                <button id="btn-start-detection" class="btn btn-primary" style="flex: 1; padding: var(--space-md); font-size: 1.1rem; justify-content: center;">Start Detection</button>
+                <button id="btn-stop-detection" class="btn btn-secondary" style="flex: 1; padding: var(--space-md); font-size: 1.1rem; justify-content: center;" disabled>Stop Detection</button>
               </div>
 
               <!-- Information Panel -->
@@ -509,42 +511,42 @@
                 <div class="telemetry-grid">
                   <div class="stat-box">
                     <span class="text-secondary">Backend</span>
-                    <strong class="text-success">Ready</strong>
+                    <strong id="telemetry-backend-status" class="text-muted">Waiting</strong>
                   </div>
                   <div class="stat-box">
                     <span class="text-secondary">Model</span>
-                    <strong class="text-warning">Waiting</strong>
+                    <strong id="telemetry-model-status" class="text-warning">Ready</strong>
                   </div>
                   <div class="stat-box">
                     <span class="text-secondary">Camera</span>
-                    <strong class="text-muted">Offline</strong>
+                    <strong id="telemetry-camera-status" class="text-muted">Offline</strong>
                   </div>
                   <div class="stat-box">
                     <span class="text-secondary">GPS</span>
-                    <strong class="text-muted">Offline</strong>
+                    <strong id="telemetry-gps-status" class="text-muted">Offline</strong>
                   </div>
                 </div>
 
                 <div class="telemetry-list" style="margin-top: var(--space-md);">
                   <div class="stat-row">
                     <span class="text-secondary">Session Timer:</span>
-                    <span style="font-family: monospace; font-size: 1.1rem;">00:00:00</span>
+                    <span id="telemetry-timer" style="font-family: monospace; font-size: 1.1rem;">00:00:00</span>
                   </div>
                   <div class="stat-row">
-                    <span class="text-secondary">Detections:</span>
-                    <span style="font-size: 1.1rem; font-weight: 600;">0</span>
+                    <span class="text-secondary">Frames Captured:</span>
+                    <span id="telemetry-frames" style="font-size: 1.1rem; font-weight: 600;">0</span>
                   </div>
                   <div class="stat-row">
-                    <span class="text-secondary">Current Speed:</span>
-                    <span>-- mph</span>
+                    <span class="text-secondary">GPS Accuracy:</span>
+                    <span id="telemetry-accuracy">-- meters</span>
                   </div>
                   <div class="stat-row">
                     <span class="text-secondary">Coordinates:</span>
-                    <span>Waiting for GPS...</span>
+                    <span id="telemetry-coords" style="font-size: 0.85rem;">Waiting for GPS...</span>
                   </div>
                   <div class="stat-row">
-                    <span class="text-secondary">FPS:</span>
-                    <span>--</span>
+                    <span class="text-secondary">Last Updated:</span>
+                    <span id="telemetry-last-updated">--</span>
                   </div>
                   <div class="stat-row">
                     <span class="text-secondary">Model Version:</span>

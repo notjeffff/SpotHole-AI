@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SpotHole AI | Application Workspace</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="./assets/css/base.css" />
+  <link rel="stylesheet" href="./assets/css/app.css" />
+</head>
+<body>
+  
+  <div class="app-layout">
+    
+    <!-- Sidebar -->
+    <aside class="app-sidebar" id="appSidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="brand">
+          <svg class="brand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-primary);">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+          <span class="brand-text" style="font-weight: 700; font-size: 1.1rem; color: var(--text-primary);">SpotHole AI</span>
+        </a>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-link active" data-view="view-dashboard" data-title="Dashboard">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="9"></rect>
+            <rect x="14" y="3" width="7" height="5"></rect>
+            <rect x="14" y="12" width="7" height="9"></rect>
+            <rect x="3" y="16" width="7" height="5"></rect>
+          </svg>
+          <span class="nav-text">Dashboard</span>
+        </a>
+        
+        <a href="#" class="nav-link" data-view="view-map" data-title="Interactive Map">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+            <line x1="9" y1="3" x2="9" y2="21"></line>
+            <line x1="15" y1="3" x2="15" y2="21"></line>
+          </svg>
+          <span class="nav-text">Interactive Map</span>
+        </a>
+        
+        <a href="#" class="nav-link" data-view="view-drive" data-title="Start Drive">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          <span class="nav-text">Start Drive</span>
+        </a>
+        
+        <a href="#" class="nav-link" data-view="view-report" data-title="Report Pothole">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="12" y1="18" x2="12" y2="12"></line>
+            <line x1="9" y1="15" x2="15" y2="15"></line>
+          </svg>
+          <span class="nav-text">Report Pothole</span>
+        </a>
+
+        <a href="#" class="nav-link" data-view="view-intelligence" data-title="Road Intelligence">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+          <span class="nav-text">Road Intelligence</span>
+        </a>
+
+        <div class="sidebar-spacer"></div>
+
+        <a href="#" class="nav-link" data-view="view-settings" data-title="Settings">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          <span class="nav-text">Settings</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- Main Content Area -->
+    <main class="app-main">
+      
+      <!-- Topbar -->
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <button class="icon-btn mobile-menu-toggle" id="mobileMenuBtn" aria-label="Toggle Menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+          <button class="icon-btn desktop-collapse-toggle" id="collapseBtn" aria-label="Collapse Sidebar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+          </button>
+          <div class="breadcrumb">SpotHole AI / <span id="breadcrumb-current">Dashboard</span></div>
+        </div>
+        
+        <div class="topbar-right">
+          <div class="search-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" placeholder="Search data..." disabled />
+          </div>
+          
+          <button class="icon-btn" aria-label="Theme Toggle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </button>
+          
+          <button class="icon-btn" aria-label="Notifications">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          </button>
+          
+          <div class="user-avatar"></div>
+        </div>
+      </header>
+
+      <!-- View Container -->
+      <div class="page-container">
+        
+        <!-- Dashboard View -->
+        <section id="view-dashboard" class="view active">
+          <div class="view-header">
+            <h1>Dashboard</h1>
+            <p class="text-secondary">Operational overview of SpotHole AI.</p>
+          </div>
+          
+          <div class="grid dashboard-main-grid">
+            
+            <!-- Top Metrics (8 Cards) -->
+            <div class="metrics-grid">
+              <div class="card metric-card">
+                <span class="text-secondary">Backend Status</span>
+                <h3 class="text-success">Ready</h3>
+              </div>
+              <div class="card metric-card">
+                <span class="text-secondary">AI Model Status</span>
+                <h3 class="text-warning">Waiting</h3>
+              </div>
+              <div class="card metric-card">
+                <span class="text-secondary">Camera Status</span>
+                <h3 class="text-muted">Offline</h3>
+              </div>
+              <div class="card metric-card">
+                <span class="text-secondary">GPS Status</span>
+                <h3 class="text-muted">Offline</h3>
+              </div>
+              <div class="card metric-card">
+                <span class="text-secondary">Total Potholes</span>
+                <h3>1,204</h3>
+              </div>
+              <div class="card metric-card">
+                <span class="text-secondary">Active Potholes</span>
+                <h3>432</h3>
+              </div>
+              <div class="card metric-card">
+                <span class="text-secondary">Reports Today</span>
+                <h3>12</h3>
+              </div>
+              <div class="card metric-card">
+                <span class="text-secondary">Session Detections</span>
+                <h3>0</h3>
+              </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions-grid">
+              <button class="card quick-action-btn" data-view="view-drive" data-title="Start Drive">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="action-icon"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                <span>Start Drive</span>
+              </button>
+              <button class="card quick-action-btn" data-view="view-map" data-title="Interactive Map">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="action-icon"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon></svg>
+                <span>Open Map</span>
+              </button>
+              <button class="card quick-action-btn" data-view="view-report" data-title="Report Pothole">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="action-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
+                <span>Report Pothole</span>
+              </button>
+              <button class="card quick-action-btn" data-view="view-intelligence" data-title="Road Intelligence">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="action-icon"><line x1="18" y1="20" x2="18" y2="10"></line></svg>
+                <span>Road Intelligence</span>
+              </button>
+            </div>
+
+            <div class="dashboard-middle-grid">
+              <!-- System Status -->
+              <div class="card system-status-panel">
+                <h3>System Status</h3>
+                <div class="status-list">
+                  <div class="status-row">
+                    <span>Backend</span>
+                    <span class="status-chip chip-ready">Ready</span>
+                  </div>
+                  <div class="status-row">
+                    <span>Database</span>
+                    <span class="status-chip chip-ready">Ready</span>
+                  </div>
+                  <div class="status-row">
+                    <span>YOLO Edge AI</span>
+                    <span class="status-chip chip-waiting">Waiting</span>
+                  </div>
+                  <div class="status-row">
+                    <span>Camera Stream</span>
+                    <span class="status-chip chip-offline">Offline</span>
+                  </div>
+                  <div class="status-row">
+                    <span>GPS Telemetry</span>
+                    <span class="status-chip chip-error">Error</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Recent Activity -->
+              <div class="card recent-activity-panel">
+                <h3>Recent Activity</h3>
+                <div class="activity-feed">
+                  <div class="activity-item">
+                    <span class="activity-dot bg-blue"></span>
+                    <div class="activity-content">
+                      <p>Manual Report Submitted</p>
+                      <span class="activity-time">2 mins ago</span>
+                    </div>
+                  </div>
+                  <div class="activity-item">
+                    <span class="activity-dot bg-green"></span>
+                    <div class="activity-content">
+                      <p>Map Updated</p>
+                      <span class="activity-time">15 mins ago</span>
+                    </div>
+                  </div>
+                  <div class="activity-item">
+                    <span class="activity-dot bg-orange"></span>
+                    <div class="activity-content">
+                      <p>Detection Received (89% Confidence)</p>
+                      <span class="activity-time">1 hour ago</span>
+                    </div>
+                  </div>
+                  <div class="activity-item">
+                    <span class="activity-dot bg-blue"></span>
+                    <div class="activity-content">
+                      <p>Backend Started</p>
+                      <span class="activity-time">2 hours ago</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recent Reports Table -->
+            <div class="card recent-reports-panel">
+              <h3>Recent Reports</h3>
+              <div class="table-responsive">
+                <table class="modern-table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Severity</th>
+                      <th>Location</th>
+                      <th>Status</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>#PH-1042</td>
+                      <td><span class="severity-indicator severity-high">High</span></td>
+                      <td>40.7128° N, 74.0060° W</td>
+                      <td><span class="status-chip chip-waiting">Active</span></td>
+                      <td>10:42 AM</td>
+                    </tr>
+                    <tr>
+                      <td>#PH-1041</td>
+                      <td><span class="severity-indicator severity-medium">Medium</span></td>
+                      <td>40.7306° N, 73.9866° W</td>
+                      <td><span class="status-chip chip-ready">Verified</span></td>
+                      <td>09:15 AM</td>
+                    </tr>
+                    <tr>
+                      <td>#PH-1040</td>
+                      <td><span class="severity-indicator severity-low">Low</span></td>
+                      <td>40.7580° N, 73.9855° W</td>
+                      <td><span class="status-chip chip-ready">Resolved</span></td>
+                      <td>Yesterday</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Map View -->
+        <section id="view-map" class="view">
+          <div class="view-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <h1>Interactive Map</h1>
+              <p class="text-secondary">Geospatial tracking of road damage.</p>
+            </div>
+            <button class="btn btn-secondary" onclick="document.getElementById('mapDrawer').classList.toggle('drawer-open')">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="15" y1="3" x2="15" y2="21"></line></svg>
+              Toggle Details
+            </button>
+          </div>
+          
+          <div class="layout-map-v2">
+            <!-- Left Sidebar -->
+            <div class="map-sidebar card">
+              <div class="search-box" style="width: 100%; margin-bottom: var(--space-md);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" placeholder="Search location..." style="width: 100%;" />
+              </div>
+              
+              <button class="btn btn-secondary" style="width: 100%; margin-bottom: var(--space-lg); justify-content: center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+                Locate Me
+              </button>
+
+              <div class="map-filters">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-sm);">
+                  <h3>Filters</h3>
+                  <span class="text-accent" style="font-size: 0.8rem; cursor: pointer;">Clear All</span>
+                </div>
+                
+                <div class="filter-chips" style="display: flex; gap: var(--space-xs); flex-wrap: wrap; margin-bottom: var(--space-md);">
+                  <span class="filter-chip active">Active</span>
+                  <span class="filter-chip">High Severity</span>
+                  <span class="filter-chip">Edge AI</span>
+                </div>
+
+                <div class="mock-input-group">
+                  <label>Status</label>
+                  <div class="mock-select">Active</div>
+                </div>
+                <div class="mock-input-group">
+                  <label>Severity</label>
+                  <div class="mock-select">High</div>
+                </div>
+                <div class="mock-input-group">
+                  <label>Source</label>
+                  <div class="mock-select">Edge AI</div>
+                </div>
+              </div>
+
+              <div class="map-legend" style="margin-top: auto;">
+                <h3>Legend</h3>
+                <div class="legend-row"><span class="legend-dot marker-green"></span> Resolved</div>
+                <div class="legend-row"><span class="legend-dot marker-blue"></span> Verified</div>
+                <div class="legend-row"><span class="legend-dot marker-orange"></span> Active</div>
+                <div class="legend-row"><span class="legend-dot marker-red"></span> High Severity</div>
+              </div>
+            </div>
+
+            <!-- Main Map Area -->
+            <div class="map-container">
+              <!-- HTML/CSS Fake Map Mockup -->
+              <div class="mock-map-bg">
+                <!-- Grid/Road Lines -->
+                <div class="road-line horizontal" style="top: 30%;"></div>
+                <div class="road-line horizontal" style="top: 70%;"></div>
+                <div class="road-line vertical" style="left: 40%;"></div>
+                <div class="road-line vertical" style="left: 80%;"></div>
+                <div class="road-line diagonal" style="top: 10%; left: -10%;"></div>
+
+                <!-- Fake Markers -->
+                <div class="map-marker marker-red" style="top: 28%; left: 38%;"></div>
+                <div class="map-marker marker-orange" style="top: 68%; left: 78%;">
+                  <!-- Popup for this marker -->
+                  <div class="marker-popup">
+                    <div class="popup-header">
+                      <strong>#PH-1042</strong>
+                      <span class="status-chip chip-waiting">Active</span>
+                    </div>
+                    <div class="popup-body">
+                      <div class="popup-row"><span>Severity:</span> <span class="text-warning">Medium</span></div>
+                      <div class="popup-row"><span>Confidence:</span> <span>89%</span></div>
+                      <div class="popup-row"><span>Detected:</span> <span>10:42 AM</span></div>
+                      <div class="popup-row"><span>Source:</span> <span>Edge AI</span></div>
+                      <div class="popup-row"><span>GPS:</span> <span>40.7128° N, 74.0060° W</span></div>
+                    </div>
+                    <button class="btn btn-primary btn-sm" style="width: 100%; margin-top: var(--space-sm);">View Details</button>
+                  </div>
+                </div>
+                
+                <div class="map-marker marker-green" style="top: 72%; left: 35%;"></div>
+                <div class="map-marker marker-blue" style="top: 25%; left: 82%;"></div>
+                
+                <!-- Cluster -->
+                <div class="map-marker-cluster" style="top: 50%; left: 60%;">4</div>
+              </div>
+            </div>
+
+            <!-- Right Side Panel (Drawer) -->
+            <div class="map-drawer card drawer-open" id="mapDrawer">
+              <div class="drawer-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: var(--space-md); margin-bottom: var(--space-md);">
+                <h3 style="margin: 0;">Pothole Details</h3>
+                <button class="icon-btn" onclick="document.getElementById('mapDrawer').classList.remove('drawer-open')">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+              </div>
+              
+              <div class="drawer-content">
+                <div class="mock-image-placeholder" style="width: 100%; height: 160px; background-color: var(--bg-primary); border: 1px dashed var(--border-strong); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--text-muted); margin-bottom: var(--space-md);">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                </div>
+                
+                <h4 style="margin-bottom: var(--space-xs);">#PH-1042</h4>
+                <p class="text-secondary" style="font-size: 0.9rem; margin-bottom: var(--space-md);">Spotted on Main St & 4th Ave.</p>
+                
+                <div class="stat-row">
+                  <span class="text-secondary">Condition:</span>
+                  <span class="text-warning">Moderate Damage</span>
+                </div>
+                <div class="stat-row">
+                  <span class="text-secondary">Recent Reports:</span>
+                  <span>3 within 24h</span>
+                </div>
+                
+                <h4 style="margin-top: var(--space-lg); margin-bottom: var(--space-sm);">Nearby Detections</h4>
+                <div class="mock-list">
+                  <div class="mock-item" style="padding: var(--space-sm); font-size: 0.85rem; display: flex; justify-content: space-between;">
+                    <span>#PH-1039</span>
+                    <span class="text-muted">0.2 mi away</span>
+                  </div>
+                  <div class="mock-item" style="padding: var(--space-sm); font-size: 0.85rem; display: flex; justify-content: space-between;">
+                    <span>#PH-0982</span>
+                    <span class="text-success">Resolved</span>
+                  </div>
+                </div>
+                
+                <button class="btn btn-primary" style="width: 100%; margin-top: var(--space-lg);">Update Status</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Start Drive View -->
+        <section id="view-drive" class="view">
+          <div class="view-header">
+            <h1>Start Drive</h1>
+            <p class="text-secondary">Edge AI interface for real-time pothole detection.</p>
+          </div>
+          
+          <div class="layout-drive-v2">
+            <!-- Left Side: Camera & Info -->
+            <div class="drive-main-column">
+              <!-- Camera Preview -->
+              <div class="camera-container">
+                <div class="camera-overlay-text">
+                  <span class="pulse-dot"></span> Waiting for Camera...
+                </div>
+                <!-- Mock Detection Overlay -->
+                <div class="mock-detection-box">
+                  <div class="detection-label">Pothole <span class="confidence">92%</span></div>
+                </div>
+                <!-- Scanning animation line -->
+                <div class="scan-line"></div>
+              </div>
+              
+              <div class="drive-controls" style="margin-top: var(--space-md); display: flex; gap: var(--space-md);">
+                <button class="btn btn-primary" style="flex: 1; padding: var(--space-md); font-size: 1.1rem; justify-content: center;">Start Detection</button>
+                <button class="btn btn-secondary" style="flex: 1; padding: var(--space-md); font-size: 1.1rem; justify-content: center;">Stop Detection</button>
+              </div>
+
+              <!-- Information Panel -->
+              <div class="card info-flow-panel" style="margin-top: var(--space-xl);">
+                <h3 style="margin-bottom: var(--space-lg);">How AI Detection Works</h3>
+                <div class="info-flow">
+                  <div class="flow-step">
+                    <div class="flow-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg></div>
+                    <span>Frame Capture</span>
+                  </div>
+                  <div class="flow-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+                  <div class="flow-step">
+                    <div class="flow-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></div>
+                    <span>YOLO Inference</span>
+                  </div>
+                  <div class="flow-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+                  <div class="flow-step">
+                    <div class="flow-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                    <span>Backend Validation</span>
+                  </div>
+                  <div class="flow-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+                  <div class="flow-step">
+                    <div class="flow-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg></div>
+                    <span>Database Storage</span>
+                  </div>
+                  <div class="flow-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+                  <div class="flow-step">
+                    <div class="flow-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon></svg></div>
+                    <span>Map Update</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Side: Telemetry & Log -->
+            <div class="drive-telemetry-column">
+              <div class="card telemetry-panel" style="margin-bottom: var(--space-md);">
+                <h3>Telemetry</h3>
+                
+                <div class="telemetry-grid">
+                  <div class="stat-box">
+                    <span class="text-secondary">Backend</span>
+                    <strong class="text-success">Ready</strong>
+                  </div>
+                  <div class="stat-box">
+                    <span class="text-secondary">Model</span>
+                    <strong class="text-warning">Waiting</strong>
+                  </div>
+                  <div class="stat-box">
+                    <span class="text-secondary">Camera</span>
+                    <strong class="text-muted">Offline</strong>
+                  </div>
+                  <div class="stat-box">
+                    <span class="text-secondary">GPS</span>
+                    <strong class="text-muted">Offline</strong>
+                  </div>
+                </div>
+
+                <div class="telemetry-list" style="margin-top: var(--space-md);">
+                  <div class="stat-row">
+                    <span class="text-secondary">Session Timer:</span>
+                    <span style="font-family: monospace; font-size: 1.1rem;">00:00:00</span>
+                  </div>
+                  <div class="stat-row">
+                    <span class="text-secondary">Detections:</span>
+                    <span style="font-size: 1.1rem; font-weight: 600;">0</span>
+                  </div>
+                  <div class="stat-row">
+                    <span class="text-secondary">Current Speed:</span>
+                    <span>-- mph</span>
+                  </div>
+                  <div class="stat-row">
+                    <span class="text-secondary">Coordinates:</span>
+                    <span>Waiting for GPS...</span>
+                  </div>
+                  <div class="stat-row">
+                    <span class="text-secondary">FPS:</span>
+                    <span>--</span>
+                  </div>
+                  <div class="stat-row">
+                    <span class="text-secondary">Model Version:</span>
+                    <span>YOLOv8-Nano (v2.1)</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="card detection-feed-panel" style="flex: 1; display: flex; flex-direction: column;">
+                <h3>Event Log</h3>
+                <div class="detection-feed" style="flex: 1; overflow-y: auto; background-color: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: var(--space-sm); margin-top: var(--space-sm);">
+                  <div class="log-entry">
+                    <span class="log-time">[10:45:00 AM]</span>
+                    <span class="log-msg">Session Initialized.</span>
+                  </div>
+                  <div class="log-entry text-warning">
+                    <span class="log-time">[10:45:01 AM]</span>
+                    <span class="log-msg">Waiting for Camera input...</span>
+                  </div>
+                  <!-- Mock entries for design -->
+                  <div class="log-entry" style="opacity: 0.5;">
+                    <span class="log-time">[10:46:22 AM]</span>
+                    <span class="log-msg">Camera Ready. (Mock)</span>
+                  </div>
+                  <div class="log-entry" style="opacity: 0.5;">
+                    <span class="log-time">[10:46:25 AM]</span>
+                    <span class="log-msg text-accent">Detection Received: Pothole (92%)</span>
+                  </div>
+                  <div class="log-entry" style="opacity: 0.5;">
+                    <span class="log-time">[10:46:26 AM]</span>
+                    <span class="log-msg text-success">Detection Confirmed. Saving...</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Report Pothole View -->
+        <!-- Report Pothole View -->
+        <section id="view-report" class="view">
+          <div class="view-header">
+            <h1>Report Pothole</h1>
+            <p class="text-secondary">Manual entry form for community road damage reports.</p>
+          </div>
+          
+          <div class="layout-report-v2">
+            <!-- Left Column: Reporting Form -->
+            <div class="report-main-column">
+              
+              <!-- Mock Status States (for UI preview only) -->
+              <div class="ui-state-previews" style="display: flex; flex-direction: column; gap: var(--space-sm); margin-bottom: var(--space-lg);">
+                <div class="state-banner state-success" style="display: none;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                  Submission Successful. Thank you for your report!
+                </div>
+                <div class="state-banner state-error" style="display: none;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                  Validation Error: Image and Location are required.
+                </div>
+              </div>
+
+              <div class="card report-form">
+                
+                <div class="form-group">
+                  <label>Upload Image <span class="text-error">*</span></label>
+                  <div class="upload-zone">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted" style="margin-bottom: var(--space-sm);"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                    <p class="text-primary" style="font-weight: 500; margin-bottom: 4px;">Drag and drop image here</p>
+                    <p class="text-muted" style="font-size: 0.85rem; margin-bottom: var(--space-md);">PNG, JPG, or JPEG (Max 10MB)</p>
+                    <button class="btn btn-secondary btn-sm">Browse Image</button>
+                  </div>
+                  <!-- Mock Progress state -->
+                  <div class="upload-progress" style="display: none; margin-top: var(--space-sm);">
+                    <div class="progress-bar-container"><div class="progress-bar" style="width: 45%;"></div></div>
+                    <span class="text-muted" style="font-size: 0.8rem;">Uploading... 45%</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Location <span class="text-error">*</span></label>
+                  <div style="display: flex; gap: var(--space-sm); margin-bottom: var(--space-sm);">
+                    <div class="mock-input" style="flex: 1; display: flex; align-items: center; gap: 8px;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                      40.7128° N, 74.0060° W
+                    </div>
+                    <button class="btn btn-secondary">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+                      Use Current
+                    </button>
+                  </div>
+                  <!-- Mock Map Picker Placeholder -->
+                  <div class="map-picker-placeholder" style="height: 150px; background-color: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 0.9rem;">
+                    Map Location Picker (Leaflet placeholder)
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Severity <span class="text-error">*</span></label>
+                  <div class="segmented-control">
+                    <button class="segment-btn">Low</button>
+                    <button class="segment-btn active">Medium</button>
+                    <button class="segment-btn">High</button>
+                    <button class="segment-btn segment-critical">Critical</button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Road Name</label>
+                  <input type="text" class="mock-input" style="width: 100%;" placeholder="e.g. Main Street" />
+                </div>
+
+                <div class="form-group">
+                  <label>Description & Notes</label>
+                  <textarea class="mock-textarea" style="width: 100%; height: 100px;" placeholder="Provide any additional details..."></textarea>
+                </div>
+
+                <div class="form-actions" style="display: flex; gap: var(--space-md); margin-top: var(--space-xl);">
+                  <button class="btn btn-secondary" style="flex: 1; justify-content: center;">Reset Form</button>
+                  <button class="btn btn-primary" style="flex: 2; justify-content: center;">Submit Report</button>
+                </div>
+              </div>
+
+              <!-- Report Summary Mock -->
+              <div class="card report-summary-card" style="margin-top: var(--space-xl);">
+                <h3 style="margin-bottom: var(--space-md);">Report Preview</h3>
+                <div style="display: flex; gap: var(--space-lg); align-items: flex-start;">
+                  <div class="summary-image" style="width: 120px; height: 120px; background-color: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                  </div>
+                  <div class="summary-details" style="flex: 1;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-xs);">
+                      <strong>#PH-DRAFT</strong>
+                      <span class="status-chip chip-waiting">Draft</span>
+                    </div>
+                    <div class="popup-row"><span>Severity:</span> <span class="text-warning">Medium</span></div>
+                    <div class="popup-row"><span>Location:</span> <span>40.7128° N, 74.0060° W</span></div>
+                    <div class="popup-row"><span>Time:</span> <span>Just now</span></div>
+                    <p class="text-muted" style="font-size: 0.85rem; margin-top: var(--space-sm);">Awaiting submission to backend...</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Right Column: Information Flow -->
+            <div class="report-info-column">
+              <div class="card info-flow-panel">
+                <h3 style="margin-bottom: var(--space-lg);">How Manual Reporting Works</h3>
+                <div class="info-flow vertical-flow">
+                  <div class="flow-step">
+                    <div class="flow-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></div>
+                    <div class="flow-text">
+                      <strong>Capture Image</strong>
+                      <p class="text-muted">Take a clear photo of the pothole.</p>
+                    </div>
+                  </div>
+                  <div class="flow-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg></div>
+                  
+                  <div class="flow-step">
+                    <div class="flow-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
+                    <div class="flow-text">
+                      <strong>Verify Location</strong>
+                      <p class="text-muted">Use GPS or the map to tag the spot.</p>
+                    </div>
+                  </div>
+                  <div class="flow-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg></div>
+
+                  <div class="flow-step">
+                    <div class="flow-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></div>
+                    <div class="flow-text">
+                      <strong>Submit Report</strong>
+                      <p class="text-muted">Send your data to the SpotHole API.</p>
+                    </div>
+                  </div>
+                  <div class="flow-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg></div>
+
+                  <div class="flow-step">
+                    <div class="flow-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></div>
+                    <div class="flow-text">
+                      <strong>Backend Verification</strong>
+                      <p class="text-muted">Admins and algorithms verify the claim.</p>
+                    </div>
+                  </div>
+                  <div class="flow-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg></div>
+
+                  <div class="flow-step">
+                    <div class="flow-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon></svg></div>
+                    <div class="flow-text">
+                      <strong>Intelligence Update</strong>
+                      <p class="text-muted">The interactive map is updated globally.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Road Intelligence Dashboard View -->
+        <!-- Road Intelligence Dashboard View -->
+        <section id="view-intelligence" class="view">
+          <div class="view-header" style="display: flex; justify-content: space-between; align-items: flex-end;">
+            <div>
+              <h1>Road Intelligence</h1>
+              <p class="text-secondary">Comprehensive analytics, operations, and tabular data.</p>
+            </div>
+            
+            <!-- Filters Bar -->
+            <div class="intelligence-filters" style="display: flex; gap: var(--space-md); align-items: center;">
+              <div class="mock-input-group" style="margin: 0;">
+                <div class="mock-input" style="display: flex; align-items: center; gap: 8px; width: 250px;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                  <span class="text-muted">Search road or ID...</span>
+                </div>
+              </div>
+              <div class="mock-select" style="min-width: 130px; padding: 8px 12px;">Last 30 Days</div>
+              <div class="mock-select" style="min-width: 130px; padding: 8px 12px;">All Severities</div>
+              <div class="mock-select" style="min-width: 130px; padding: 8px 12px;">All Statuses</div>
+              <button class="btn btn-secondary">Reset</button>
+            </div>
+          </div>
+          
+          <!-- Top KPI Section -->
+          <div class="intelligence-kpi-grid">
+            <div class="card stat-card">
+              <span class="stat-label">Total Potholes</span>
+              <span class="stat-value">1,248</span>
+              <span class="text-success text-sm">+12% vs last month</span>
+            </div>
+            <div class="card stat-card">
+              <span class="stat-label">Active Potholes</span>
+              <span class="stat-value text-warning">342</span>
+              <span class="text-muted text-sm">Awaiting repair</span>
+            </div>
+            <div class="card stat-card">
+              <span class="stat-label">Resolved</span>
+              <span class="stat-value text-success">906</span>
+              <span class="text-muted text-sm">Verified patched</span>
+            </div>
+            <div class="card stat-card">
+              <span class="stat-label">Critical Reports</span>
+              <span class="stat-value text-error">18</span>
+              <span class="text-error text-sm">Requires immediate action</span>
+            </div>
+            <div class="card stat-card">
+              <span class="stat-label">Reports Today</span>
+              <span class="stat-value">45</span>
+              <span class="text-muted text-sm">23 AI / 22 Manual</span>
+            </div>
+            <div class="card stat-card">
+              <span class="stat-label">Avg Confidence</span>
+              <span class="stat-value">91.4%</span>
+              <span class="text-muted text-sm">YOLOv8-Nano</span>
+            </div>
+            <div class="card stat-card">
+              <span class="stat-label">Roads Monitored</span>
+              <span class="stat-value">142 mi</span>
+              <span class="text-success text-sm">Active coverage</span>
+            </div>
+            <div class="card stat-card">
+              <span class="stat-label">System Status</span>
+              <span class="stat-value text-success">Optimal</span>
+              <span class="text-muted text-sm">All services running</span>
+            </div>
+          </div>
+
+          <div class="layout-intelligence-v2" style="margin-top: var(--space-xl);">
+            
+            <!-- Left Column: Recent Activity Timeline -->
+            <div class="intelligence-timeline-column">
+              <div class="card">
+                <h3 style="margin-bottom: var(--space-lg);">Recent Activity</h3>
+                <div class="activity-timeline">
+                  
+                  <div class="timeline-item">
+                    <div class="timeline-icon text-accent"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div>
+                    <div class="timeline-content">
+                      <div class="timeline-title">Manual report submitted</div>
+                      <div class="timeline-desc text-muted">A citizen reported a High severity pothole on Oak Street.</div>
+                      <div class="timeline-time text-muted">2 mins ago</div>
+                    </div>
+                  </div>
+
+                  <div class="timeline-item">
+                    <div class="timeline-icon text-success"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></div>
+                    <div class="timeline-content">
+                      <div class="timeline-title">Pothole Resolved</div>
+                      <div class="timeline-desc text-muted">Maintenance crew verified repair at Main St & 5th Ave.</div>
+                      <div class="timeline-time text-muted">15 mins ago</div>
+                    </div>
+                  </div>
+
+                  <div class="timeline-item">
+                    <div class="timeline-icon text-primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg></div>
+                    <div class="timeline-content">
+                      <div class="timeline-title">New pothole detected (AI)</div>
+                      <div class="timeline-desc text-muted">YOLOv8 detected a Medium pothole on Route 66 (93% conf).</div>
+                      <div class="timeline-time text-muted">1 hour ago</div>
+                    </div>
+                  </div>
+
+                  <div class="timeline-item">
+                    <div class="timeline-icon text-warning"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg></div>
+                    <div class="timeline-content">
+                      <div class="timeline-title">Detection confidence updated</div>
+                      <div class="timeline-desc text-muted">Multiple passes elevated Pine Rd pothole confidence to 98%.</div>
+                      <div class="timeline-time text-muted">3 hours ago</div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Center Column: Priority Maintenance Queue -->
+            <div class="intelligence-main-column">
+              <div class="card" style="height: 100%; display: flex; flex-direction: column;">
+                <h3 style="margin-bottom: var(--space-md);">Priority Maintenance Queue</h3>
+                <div style="flex: 1; overflow-x: auto;">
+                  <table class="mock-table">
+                    <thead>
+                      <tr>
+                        <th>Road Name</th>
+                        <th>Severity</th>
+                        <th>Reports</th>
+                        <th>Confidence</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td style="font-weight: 500;">I-95 Northbound</td>
+                        <td><span class="text-error" style="font-weight: 600;">Critical</span></td>
+                        <td>12</td>
+                        <td>99%</td>
+                        <td><span class="status-chip" style="background: rgba(239, 68, 68, 0.2); color: #EF4444; border: 1px solid rgba(239,68,68,0.3);">P1</span></td>
+                        <td><span class="status-chip chip-error">Action Req</span></td>
+                      </tr>
+                      <tr>
+                        <td style="font-weight: 500;">Maple Avenue</td>
+                        <td><span class="text-warning" style="font-weight: 600;">High</span></td>
+                        <td>4</td>
+                        <td>94%</td>
+                        <td><span class="status-chip" style="background: rgba(245, 158, 11, 0.2); color: #F59E0B; border: 1px solid rgba(245,158,11,0.3);">P2</span></td>
+                        <td><span class="status-chip chip-waiting">Assigned</span></td>
+                      </tr>
+                      <tr>
+                        <td style="font-weight: 500;">Elm St Bridge</td>
+                        <td><span class="text-warning" style="font-weight: 600;">High</span></td>
+                        <td>2</td>
+                        <td>88%</td>
+                        <td><span class="status-chip" style="background: rgba(245, 158, 11, 0.2); color: #F59E0B; border: 1px solid rgba(245,158,11,0.3);">P2</span></td>
+                        <td><span class="status-chip chip-ready">Open</span></td>
+                      </tr>
+                      <tr>
+                        <td style="font-weight: 500;">Broadway</td>
+                        <td><span class="text-accent" style="font-weight: 600;">Medium</span></td>
+                        <td>1</td>
+                        <td>91%</td>
+                        <td><span class="status-chip" style="background: rgba(59, 130, 246, 0.2); color: #3B82F6; border: 1px solid rgba(59,130,246,0.3);">P3</span></td>
+                        <td><span class="status-chip chip-ready">Open</span></td>
+                      </tr>
+                      <tr>
+                        <td style="font-weight: 500;">Washington Blvd</td>
+                        <td><span class="text-muted" style="font-weight: 600;">Low</span></td>
+                        <td>1</td>
+                        <td>82%</td>
+                        <td><span class="status-chip" style="background: var(--bg-surface-hover); color: var(--text-secondary); border: 1px solid var(--border-subtle);">P4</span></td>
+                        <td><span class="status-chip chip-ready">Open</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Operational Stats -->
+            <div class="intelligence-stats-column">
+              <div style="display: flex; flex-direction: column; gap: var(--space-lg);">
+                
+                <div class="card">
+                  <h3 style="margin-bottom: var(--space-md);">Detection Sources</h3>
+                  <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+                      <span class="text-secondary">AI Detections</span>
+                      <strong class="text-primary">84%</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                      <span class="text-secondary">Manual Reports</span>
+                      <strong class="text-primary">16%</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <h3 style="margin-bottom: var(--space-md);">Operational Backlog</h3>
+                  <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+                      <span class="text-secondary">Pending Verification</span>
+                      <strong class="text-warning">28</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+                      <span class="text-secondary">Average Severity</span>
+                      <strong class="text-warning">Medium-High</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                      <span class="text-secondary">Recent Alerts</span>
+                      <strong class="text-error">3</strong>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Section: Recent Reports -->
+          <div class="card" style="margin-top: var(--space-xl);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-lg);">
+              <h3>All Recent Reports</h3>
+              <div class="pagination-mock" style="display: flex; gap: 8px; align-items: center;">
+                <span class="text-muted text-sm" style="margin-right: var(--space-md);">Showing 1-5 of 1,248</span>
+                <button class="btn btn-secondary btn-sm" disabled>&lt;</button>
+                <button class="btn btn-secondary btn-sm" style="background-color: var(--bg-surface-hover);">1</button>
+                <button class="btn btn-secondary btn-sm">2</button>
+                <button class="btn btn-secondary btn-sm">3</button>
+                <button class="btn btn-secondary btn-sm">&gt;</button>
+              </div>
+            </div>
+            
+            <div style="overflow-x: auto;">
+              <table class="mock-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Road Location</th>
+                    <th>Severity</th>
+                    <th>Reporter Source</th>
+                    <th>Status</th>
+                    <th>Timestamp</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-muted" style="font-family: monospace;">#PH-9842</td>
+                    <td style="font-weight: 500;">Oak Street (40.71, -74.01)</td>
+                    <td><span class="text-warning" style="font-weight: 600;">High</span></td>
+                    <td>Citizen App</td>
+                    <td><span class="status-chip chip-waiting">Pending</span></td>
+                    <td class="text-muted">Today, 09:42 AM</td>
+                  </tr>
+                  <tr>
+                    <td class="text-muted" style="font-family: monospace;">#PH-9841</td>
+                    <td style="font-weight: 500;">Route 66 (35.12, -112.11)</td>
+                    <td><span class="text-accent" style="font-weight: 600;">Medium</span></td>
+                    <td>AI Edge Unit #4</td>
+                    <td><span class="status-chip chip-ready">Verified</span></td>
+                    <td class="text-muted">Today, 08:15 AM</td>
+                  </tr>
+                  <tr>
+                    <td class="text-muted" style="font-family: monospace;">#PH-9840</td>
+                    <td style="font-weight: 500;">Pine Rd (42.36, -71.05)</td>
+                    <td><span class="text-error" style="font-weight: 600;">Critical</span></td>
+                    <td>AI Edge Unit #2</td>
+                    <td><span class="status-chip chip-ready">Verified</span></td>
+                    <td class="text-muted">Yesterday, 14:30 PM</td>
+                  </tr>
+                  <tr>
+                    <td class="text-muted" style="font-family: monospace;">#PH-9839</td>
+                    <td style="font-weight: 500;">Main St & 5th Ave</td>
+                    <td><span class="text-muted" style="font-weight: 600;">Low</span></td>
+                    <td>Citizen App</td>
+                    <td><span class="status-chip chip-success">Resolved</span></td>
+                    <td class="text-muted">Yesterday, 11:20 AM</td>
+                  </tr>
+                  <tr>
+                    <td class="text-muted" style="font-family: monospace;">#PH-9838</td>
+                    <td style="font-weight: 500;">Highway 101 N</td>
+                    <td><span class="text-warning" style="font-weight: 600;">High</span></td>
+                    <td>AI Edge Unit #1</td>
+                    <td><span class="status-chip chip-waiting">Assigned</span></td>
+                    <td class="text-muted">Oct 12, 09:00 AM</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </section>
+        
+        <!-- Settings View -->
+        <section id="view-settings" class="view">
+          <div class="view-header">
+            <h1>Settings</h1>
+            <p class="text-secondary">Application and user preferences.</p>
+          </div>
+          
+          <div class="layout-settings">
+            <div class="card">
+              <h3>General</h3>
+              <div class="mock-list">
+                <div class="mock-item">Theme Preferences (Coming soon)</div>
+                <div class="mock-item">API Keys (Coming soon)</div>
+              </div>
+            </div>
+            <div class="card">
+              <h3>Account</h3>
+              <div class="mock-list">
+                <div class="mock-item">Profile Placeholder</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="./assets/js/app.js"></script>
+</body>
+</html>

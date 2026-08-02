@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SpotHole AI | Application Workspace</title>
+  <title>SpotHole AI - Intelligent Road Maintenance</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <link rel="stylesheet" href="./assets/css/base.css" />
   <link rel="stylesheet" href="./assets/css/app.css" />
@@ -153,19 +156,19 @@
               </div>
               <div class="card metric-card">
                 <span class="text-secondary">Total Potholes</span>
-                <h3>1,204</h3>
+                <h3 id="metric-total-potholes">--</h3>
               </div>
               <div class="card metric-card">
                 <span class="text-secondary">Active Potholes</span>
-                <h3>432</h3>
+                <h3 id="metric-active-potholes">--</h3>
               </div>
               <div class="card metric-card">
                 <span class="text-secondary">Reports Today</span>
-                <h3>12</h3>
+                <h3 id="metric-reports-today">--</h3>
               </div>
               <div class="card metric-card">
                 <span class="text-secondary">Session Detections</span>
-                <h3>0</h3>
+                <h3 id="metric-session-detections">--</h3>
               </div>
             </div>
 
@@ -267,7 +270,7 @@
                       <th>Time</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="dashboard-recent-reports-body">
                     <tr>
                       <td>#PH-1042</td>
                       <td><span class="severity-indicator severity-high">High</span></td>
@@ -359,42 +362,8 @@
             </div>
 
             <!-- Main Map Area -->
-            <div class="map-container">
-              <!-- HTML/CSS Fake Map Mockup -->
-              <div class="mock-map-bg">
-                <!-- Grid/Road Lines -->
-                <div class="road-line horizontal" style="top: 30%;"></div>
-                <div class="road-line horizontal" style="top: 70%;"></div>
-                <div class="road-line vertical" style="left: 40%;"></div>
-                <div class="road-line vertical" style="left: 80%;"></div>
-                <div class="road-line diagonal" style="top: 10%; left: -10%;"></div>
-
-                <!-- Fake Markers -->
-                <div class="map-marker marker-red" style="top: 28%; left: 38%;"></div>
-                <div class="map-marker marker-orange" style="top: 68%; left: 78%;">
-                  <!-- Popup for this marker -->
-                  <div class="marker-popup">
-                    <div class="popup-header">
-                      <strong>#PH-1042</strong>
-                      <span class="status-chip chip-waiting">Active</span>
-                    </div>
-                    <div class="popup-body">
-                      <div class="popup-row"><span>Severity:</span> <span class="text-warning">Medium</span></div>
-                      <div class="popup-row"><span>Confidence:</span> <span>89%</span></div>
-                      <div class="popup-row"><span>Detected:</span> <span>10:42 AM</span></div>
-                      <div class="popup-row"><span>Source:</span> <span>Edge AI</span></div>
-                      <div class="popup-row"><span>GPS:</span> <span>40.7128° N, 74.0060° W</span></div>
-                    </div>
-                    <button class="btn btn-primary btn-sm" style="width: 100%; margin-top: var(--space-sm);">View Details</button>
-                  </div>
-                </div>
-                
-                <div class="map-marker marker-green" style="top: 72%; left: 35%;"></div>
-                <div class="map-marker marker-blue" style="top: 25%; left: 82%;"></div>
-                
-                <!-- Cluster -->
-                <div class="map-marker-cluster" style="top: 50%; left: 60%;">4</div>
-              </div>
+            <div class="map-container" style="position: relative;">
+              <div id="map" style="width: 100%; height: 100%; min-height: 500px; border-radius: var(--radius-lg); z-index: 1;"></div>
             </div>
 
             <!-- Right Side Panel (Drawer) -->
@@ -545,6 +514,14 @@
                     <span id="telemetry-coords" style="font-size: 0.85rem;">Waiting for GPS...</span>
                   </div>
                   <div class="stat-row">
+                    <span class="text-secondary">Pothole ID:</span>
+                    <span id="telemetry-pothole-id">--</span>
+                  </div>
+                  <div class="stat-row">
+                    <span class="text-secondary">Match Status:</span>
+                    <span id="telemetry-match-status">--</span>
+                  </div>
+                  <div class="stat-row">
                     <span class="text-secondary">Last Updated:</span>
                     <span id="telemetry-last-updated">--</span>
                   </div>
@@ -603,13 +580,13 @@
               
               <!-- Mock Status States (for UI preview only) -->
               <div class="ui-state-previews" style="display: flex; flex-direction: column; gap: var(--space-sm); margin-bottom: var(--space-lg);">
-                <div class="state-banner state-success" style="display: none;">
+                <div id="report-success-banner" class="state-banner state-success" style="display: none;">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                   Submission Successful. Thank you for your report!
                 </div>
-                <div class="state-banner state-error" style="display: none;">
+                <div id="report-error-banner" class="state-banner state-error" style="display: none;">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                  Validation Error: Image and Location are required.
+                  Validation Error: Location is required.
                 </div>
               </div>
 
@@ -633,11 +610,11 @@
                 <div class="form-group">
                   <label>Location <span class="text-error">*</span></label>
                   <div style="display: flex; gap: var(--space-sm); margin-bottom: var(--space-sm);">
-                    <div class="mock-input" style="flex: 1; display: flex; align-items: center; gap: 8px;">
+                    <div id="report-lat-lng" class="mock-input" style="flex: 1; display: flex; align-items: center; gap: 8px;">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                      40.7128° N, 74.0060° W
+                      Waiting for GPS...
                     </div>
-                    <button class="btn btn-secondary">
+                    <button id="report-btn-gps" class="btn btn-secondary">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
                       Use Current
                     </button>
@@ -650,11 +627,11 @@
 
                 <div class="form-group">
                   <label>Severity <span class="text-error">*</span></label>
-                  <div class="segmented-control">
-                    <button class="segment-btn">Low</button>
-                    <button class="segment-btn active">Medium</button>
-                    <button class="segment-btn">High</button>
-                    <button class="segment-btn segment-critical">Critical</button>
+                  <div id="report-severity-group" class="segmented-control">
+                    <button class="segment-btn" data-val="low">Low</button>
+                    <button class="segment-btn active" data-val="medium">Medium</button>
+                    <button class="segment-btn" data-val="high">High</button>
+                    <button class="segment-btn segment-critical" data-val="critical">Critical</button>
                   </div>
                 </div>
 
@@ -665,12 +642,12 @@
 
                 <div class="form-group">
                   <label>Description & Notes</label>
-                  <textarea class="mock-textarea" style="width: 100%; height: 100px;" placeholder="Provide any additional details..."></textarea>
+                  <textarea id="report-description" class="mock-textarea" style="width: 100%; height: 100px;" placeholder="Provide any additional details..."></textarea>
                 </div>
 
                 <div class="form-actions" style="display: flex; gap: var(--space-md); margin-top: var(--space-xl);">
-                  <button class="btn btn-secondary" style="flex: 1; justify-content: center;">Reset Form</button>
-                  <button class="btn btn-primary" style="flex: 2; justify-content: center;">Submit Report</button>
+                  <button id="report-btn-reset" class="btn btn-secondary" style="flex: 1; justify-content: center;">Reset Form</button>
+                  <button id="report-btn-submit" class="btn btn-primary" style="flex: 2; justify-content: center;">Submit Report</button>
                 </div>
               </div>
 
@@ -778,28 +755,28 @@
           <div class="intelligence-kpi-grid">
             <div class="card stat-card">
               <span class="stat-label">Total Potholes</span>
-              <span class="stat-value">1,248</span>
-              <span class="text-success text-sm">+12% vs last month</span>
+              <span id="intel-total-potholes" class="stat-value">--</span>
+              <span class="text-success text-sm">Live from DB</span>
             </div>
             <div class="card stat-card">
               <span class="stat-label">Active Potholes</span>
-              <span class="stat-value text-warning">342</span>
+              <span id="intel-active-potholes" class="stat-value text-warning">--</span>
               <span class="text-muted text-sm">Awaiting repair</span>
             </div>
             <div class="card stat-card">
               <span class="stat-label">Resolved</span>
-              <span class="stat-value text-success">906</span>
+              <span id="intel-resolved" class="stat-value text-success">--</span>
               <span class="text-muted text-sm">Verified patched</span>
             </div>
             <div class="card stat-card">
               <span class="stat-label">Critical Reports</span>
-              <span class="stat-value text-error">18</span>
+              <span id="intel-critical" class="stat-value text-error">--</span>
               <span class="text-error text-sm">Requires immediate action</span>
             </div>
             <div class="card stat-card">
               <span class="stat-label">Reports Today</span>
-              <span class="stat-value">45</span>
-              <span class="text-muted text-sm">23 AI / 22 Manual</span>
+              <span id="intel-reports-today" class="stat-value">--</span>
+              <span class="text-muted text-sm">Total submissions</span>
             </div>
             <div class="card stat-card">
               <span class="stat-label">Avg Confidence</span>
@@ -882,7 +859,7 @@
                         <th>Status</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="intel-maintenance-body">
                       <tr>
                         <td style="font-weight: 500;">I-95 Northbound</td>
                         <td><span class="text-error" style="font-weight: 600;">Critical</span></td>
@@ -995,7 +972,7 @@
                     <th>Timestamp</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="intel-recent-reports-body">
                   <tr>
                     <td class="text-muted" style="font-family: monospace;">#PH-9842</td>
                     <td style="font-weight: 500;">Oak Street (40.71, -74.01)</td>

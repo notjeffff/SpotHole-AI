@@ -36,11 +36,14 @@ function initUI() {
     ui.modelStatus = document.getElementById('telemetry-model-status');
     ui.modelVersion = document.getElementById('telemetry-model-version');
     ui.inferenceTime = document.getElementById('telemetry-inference-time');
+    ui.potholeId = document.getElementById('telemetry-pothole-id');
+    ui.matchStatus = document.getElementById('telemetry-match-status');
     ui.mockDetectionBox = document.getElementById('mock-detection-box');
 }
 
 export async function startCamera() {
     initUI();
+    stopCamera(); // Prevent duplicate intervals/leaks
     
     try {
         ui.cameraStatus.textContent = 'Starting...';
@@ -62,10 +65,18 @@ export async function startCamera() {
         startSession();
         
     } catch (err) {
-        console.error('Camera access denied or unavailable', err);
+        console.error('Error accessing camera:', err);
         ui.cameraStatus.textContent = 'Error';
-        ui.cameraStatus.className = 'text-danger';
-        ui.overlayText.innerHTML = '<span class="text-danger">Camera Access Denied/Unavailable</span>';
+        ui.cameraStatus.className = 'text-error';
+        
+        ui.overlayText.style.display = 'block';
+        if (err.name === 'NotAllowedError' || err.name === 'SecurityError') {
+            ui.overlayText.innerHTML = '<span class="text-error">Camera Permission Denied</span>';
+        } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
+            ui.overlayText.innerHTML = '<span class="text-error">No Camera Found</span>';
+        } else {
+            ui.overlayText.innerHTML = `<span class="text-error">Camera Error: ${err.message}</span>`;
+        }
     }
 }
 
@@ -167,8 +178,17 @@ async function captureAndSendFrame() {
             const boxLabel = ui.mockDetectionBox.querySelector('.detection-label');
             if (boxLabel) {
                 const confPercent = Math.round(prediction.confidence * 100);
-                boxLabel.innerHTML = `${prediction.class} <span class="confidence">${confPercent}%</span>`;
+                boxLabel.innerHTML = `${prediction.class || 'Pothole'} <span class="confidence">${confPercent}%</span>`;
             }
+            
+            ui.potholeId.textContent = `#${prediction.pothole_id}`;
+            ui.matchStatus.textContent = prediction.created_new ? "New Pothole Created" : "Existing Pothole Updated";
+            if (prediction.created_new) {
+                ui.matchStatus.className = 'text-success';
+            } else {
+                ui.matchStatus.className = 'text-warning';
+            }
+            
         } else {
             ui.mockDetectionBox.style.display = 'none';
         }
@@ -223,6 +243,9 @@ export function stopCamera() {
         ui.modelStatus.className = 'text-warning';
         ui.modelVersion.textContent = 'Loading...';
         ui.inferenceTime.textContent = '-- ms';
+        ui.potholeId.textContent = '--';
+        ui.matchStatus.textContent = '--';
+        ui.matchStatus.className = '';
         ui.overlayText.style.display = 'block';
         ui.overlayText.innerHTML = '<span class="pulse-dot"></span> Waiting for Camera...';
         ui.scanLine.style.display = 'none';

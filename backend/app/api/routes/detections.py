@@ -6,7 +6,7 @@ from app.dependencies import get_db
 from app.api.deps import get_detection_service, get_ai_service
 from app.services.detection import DetectionService
 from app.services.ai_service import AIService
-from app.schemas.detection import DetectionCreate, DetectionUpdate, DetectionResponse
+from app.schemas.detection import DetectionCreate, DetectionUpdate, DetectionResponse, InferenceResponse
 
 router = APIRouter()
 
@@ -22,6 +22,14 @@ def list_detections(
     """
     return service.list(db, skip=skip, limit=limit)
 
+@router.get("/recent", response_model=List[DetectionResponse], summary="Get recent detections")
+def get_recent_detections(limit: int = 10, db: Session = Depends(get_db)):
+    """
+    Retrieve the most recent detections.
+    """
+    from app.models.detection import Detection
+    return db.query(Detection).order_by(Detection.id.desc()).limit(limit).all()
+
 @router.get("/{id}", response_model=DetectionResponse, summary="Get a detection by ID")
 def get_detection(
     id: int, 
@@ -36,20 +44,26 @@ def get_detection(
         raise HTTPException(status_code=404, detail="Detection not found")
     return detection
 
-@router.post("/", status_code=status.HTTP_201_CREATED, summary="Run inference on a detection frame")
+@router.post("/", response_model=InferenceResponse, status_code=status.HTTP_201_CREATED, summary="Run inference on a detection frame")
 def create_detection(
     detection_in: DetectionCreate, 
-    ai: AIService = Depends(get_ai_service)
+    db: Session = Depends(get_db),
+    service: DetectionService = Depends(get_detection_service)
 ):
     """
-    Phase 3E: Intercept frame, run YOLO inference, and return results.
-    Bypassing database writes completely for now.
+    Phase 3F: Intercept frame, run YOLO inference, match potholes, and return results.
     """
     if not detection_in.image_path:
         raise HTTPException(status_code=400, detail="Missing image_path payload")
         
-    prediction = ai.predict(detection_in.image_path)
-    return prediction
+    try:
+        prediction = service.process_ai_detection(db, detection_in)
+        return prediction
+    except ValueError as ve:
+        raise HTTPException(status_code=400, detail=str(ve))
+    except Exception as e:
+        print(f"Error processing AI detection: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error during inference")
 
 @router.patch("/{id}", response_model=DetectionResponse, summary="Update a detection")
 def update_detection(

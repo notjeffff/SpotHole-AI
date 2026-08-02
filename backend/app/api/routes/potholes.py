@@ -21,6 +21,26 @@ def list_potholes(
     """
     return service.list(db, skip=skip, limit=limit)
 
+@router.get("/stats", summary="Get aggregated pothole statistics")
+def get_pothole_stats(db: Session = Depends(get_db)):
+    """
+    Retrieve aggregated statistics for the dashboard.
+    """
+    from app.models.pothole import Pothole
+    from app.models.enums import PotholeStatus
+    
+    total = db.query(Pothole).count()
+    active = db.query(Pothole).filter(Pothole.status == PotholeStatus.active).count()
+    detected = db.query(Pothole).filter(Pothole.status == PotholeStatus.detected).count()
+    resolved = db.query(Pothole).filter(Pothole.status == PotholeStatus.resolved).count()
+    
+    return {
+        "total": total,
+        "active": active,
+        "detected": detected,
+        "resolved": resolved
+    }
+
 @router.get("/{id}", response_model=PotholeResponse, summary="Get a pothole by ID")
 def get_pothole(
     id: int, 

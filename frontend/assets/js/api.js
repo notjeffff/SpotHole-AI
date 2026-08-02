@@ -31,3 +31,76 @@ export async function postDetection(payload) {
         return null;
     }
 }
+
+export async function fetchPotholes() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/potholes/`);
+        if (!response.ok) return [];
+        return await response.json();
+    } catch (e) {
+        console.error('Error fetching potholes:', e);
+        return [];
+    }
+}
+
+export async function fetchPotholeStats() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/potholes/stats`);
+        if (!response.ok) return { total: 0, active: 0, detected: 0, resolved: 0 };
+        return await response.json();
+    } catch (e) {
+        console.error('Error fetching pothole stats:', e);
+        return { total: 0, active: 0, detected: 0, resolved: 0 };
+    }
+}
+
+export async function fetchRecentDetections(limit=10) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/detections/recent?limit=${limit}`);
+        if (!response.ok) return [];
+        return await response.json();
+    } catch (e) {
+        console.error('Error fetching recent detections:', e);
+        return [];
+    }
+}
+
+export async function fetchReportStats() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/reports/stats`);
+        if (!response.ok) return { total: 0 };
+        return await response.json();
+    } catch (e) {
+        console.error('Error fetching report stats:', e);
+        return { total: 0 };
+    }
+}
+
+export async function fetchRecentReports(limit=10) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/reports/recent?limit=${limit}`);
+        if (!response.ok) return [];
+        return await response.json();
+    } catch (e) {
+        console.error('Error fetching recent reports:', e);
+        return [];
+    }
+}
+
+export async function postReport(payload) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/reports/`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        if (!response.ok) {
+            console.error('Failed to post report:', await response.text());
+            return null;
+        }
+        return await response.json();
+    } catch (e) {
+        console.error('Error posting report:', e);
+        return null;
+    }
+}

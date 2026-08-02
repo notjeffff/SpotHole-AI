@@ -42,7 +42,7 @@ class AIService:
             "model_version": self._model_version
         }
 
-        if self._model is None:
+        if self._model is None or not base64_image_str:
             return response
 
         try:

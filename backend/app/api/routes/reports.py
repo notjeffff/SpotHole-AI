@@ -21,6 +21,23 @@ def list_reports(
     """
     return service.list(db, skip=skip, limit=limit)
 
+@router.get("/stats", summary="Get aggregated report statistics")
+def get_report_stats(db: Session = Depends(get_db)):
+    """
+    Retrieve aggregated report statistics for the dashboard.
+    """
+    from app.models.report import Report
+    total = db.query(Report).count()
+    return {"total": total}
+
+@router.get("/recent", response_model=List[ReportResponse], summary="Get recent reports")
+def get_recent_reports(limit: int = 10, db: Session = Depends(get_db)):
+    """
+    Retrieve the most recent reports.
+    """
+    from app.models.report import Report
+    return db.query(Report).order_by(Report.id.desc()).limit(limit).all()
+
 @router.get("/{id}", response_model=ReportResponse, summary="Get a report by ID")
 def get_report(
     id: int, 

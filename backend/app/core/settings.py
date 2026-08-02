@@ -12,6 +12,9 @@ class Settings(BaseSettings):
     
     # AI Config
     YOLO_MODEL_PATH: str = "yolov8n.pt"
+    MATCH_RADIUS_METERS: float = 15.0
+    CONFIDENCE_THRESHOLD: float = 0.85
+    FRAME_INTERVAL: int = 1
     
     # Database configuration
     DATABASE_URL: str = "sqlite:///./data/spothole.db"

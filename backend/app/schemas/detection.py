@@ -23,7 +23,19 @@ class DetectionUpdate(BaseModel):
 
 class DetectionResponse(DetectionBase):
     id: int
+    pothole_id: int
     detected_at: datetime
     created_at: datetime
 
     model_config = ConfigDict(from_attributes=True)
+
+class InferenceResponse(BaseModel):
+    success: bool
+    detected: bool
+    pothole_id: Optional[int] = None
+    created_new: Optional[bool] = None
+    confidence: Optional[float] = None
+    status: Optional[str] = None
+    bbox: Optional[dict] = None
+    processing_time_ms: Optional[int] = None
+    model_version: Optional[str] = None

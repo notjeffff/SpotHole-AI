@@ -10,6 +10,17 @@
   background-color: var(--bg-primary);
 }
 
+/* Leaflet Dark Popup Adjustments */
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+.leaflet-container a.leaflet-popup-close-button {
+  color: var(--text-secondary);
+}
+
+
 /* Sidebar */
 .app-sidebar {
   width: 260px;
